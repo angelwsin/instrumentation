@@ -7,7 +7,16 @@ public class Premain {
     public static void premain(String agentArgs, Instrumentation inst){//1
         System.out.println(" premain  agentArgs:"+agentArgs);
        // inst.addTransformer(new TestTransformer());
-        inst.addTransformer(new BCELTiming());
+       /* String work =  System.getProperty("java.class.path");
+        try {
+            JarFile jarFile  = new JarFile(new File(work+File.separator+"lib"+File.separator+"bcel-6.0.jar"));
+            inst.appendToSystemClassLoaderSearch(jarFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+           // logger.error("", e);
+        }
+        */
+        inst.addTransformer(new BCELTiming(agentArgs));
     }
     
    public static void premain(String agentArgs){//2
